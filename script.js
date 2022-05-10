@@ -19,7 +19,8 @@
     fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response=>response.json())
         .then(function (data){
-          appendData(data);
+          appendData(data)
+          console.log(data)
         })
     function appendData(data){
       answer.innerHTML="";
@@ -37,6 +38,7 @@
         .then(response=>response.json())
         .then(function (data){
           appendData(data);
+          console.log(data)
         })
     function appendData(data){
       answer.innerHTML = "";
@@ -46,7 +48,19 @@
   })
 
   cw3.addEventListener("click", function () {
-    //TODO implement it
-  })
+    answer.innerHTML = "Processing...";
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+        .then(response => response.json())
+        .then(array => { answer.innerHTML = "Dodano nowy post o ID = " + array.id; }) })
 
 })();
